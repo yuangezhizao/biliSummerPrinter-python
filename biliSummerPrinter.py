@@ -139,13 +139,17 @@ class BiliBitmap():
         print("[INFO]:Bitmap cutting...")
         rr = BiliBitmap.createEmptyBitmapList(length, width)
         i = 0
-        while i <= width:
+        while i < width:
             i2 = 0
             while True:
-                if i2 > int(length):
+                if i2 == int(length):
                     i2 = 1
                     break
-                rr[i][i2] = bitMap[y + i - 1][x + i - 1]
+                try:
+                    rr[i][i2] = bitMap[y + i - 1][x + i - 1]
+                except:
+                    print("[ERROR!] i=%s i2=%s x=%s y=%s" % (i,i2,x,y))
+                    raise
                 i2 += 1
             i += 1
         return rr
