@@ -36,7 +36,7 @@ $ pip install requests
 # 快速上手
 
 ``` python
-from biliSummerPrinter import * #导入本模块
+from biliSummerPrinter import biliSummerPrinter,BiliBitmap #导入本模块,使用此格式导入可享受VSCode之自动完成特性。
 
 you = biliSummerPrinter('yourID', 'yourCookie') #实例化一个Printer（必须步骤）
 cdTime = you.getCDTime() #获取剩余时间
