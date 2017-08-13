@@ -18,6 +18,7 @@ $ pip install requests
   - `biliSummerPrinter.getRawBitmap()` 返回纯字符串格式的bitmap
   - `biliSummerPrinter.getListBitmap()` 返回经过解析的二维列表格式的bitmap
   - `biliSummerPrinter.getBitmap()` 返回一个BiliBitmap对象
+- 理论上可通过实例化多个类实现十万甚至九万个账号同时绘制，未测试。
 
 ### BiliBitmap类
 - 使用一个经过解析的Bitmap二维列表来实例化该类
@@ -29,10 +30,8 @@ $ pip install requests
 - 该类目前并**不**完善
 
 ### 解析返回的bitmap二维列表使用说明
-- **重要说明**：与屑站前端处理坐标的方式相同，以画板最左上角的像素为原点（0，0），最左下角的坐标为（1179，719）
+- **重要说明**：与屑站前端处理坐标的方式相同，以画板最左上角的像素为原点（0，0），最左下角的坐标为（1179，719），总大小1280*720
 - 第一个下标对应夏日绘版中的y值（高），第二个下表对应x值（长），对应的值为颜色名。可能为int，请自行转换。
-- 
-
 
 # 快速上手
 
