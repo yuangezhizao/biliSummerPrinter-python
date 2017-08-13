@@ -70,9 +70,13 @@ class biliSummerPrinter(object):
         jDate = r.json()
         return jDate['data']['bitmap']
 
-    def getBitmap(self):
+    def getListBitmap(self):
         # 直接返回人类可用的新鲜bitmap二维列表
         return BiliBitmap.decodeBitmap(self.getRawBitmap())
+
+    def getBitmap(self):
+        # 返回一个BiliBitmap对象
+        return BiliBitmap.decodeJSON(self.getRawBitmap())
 
 
 class BiliBitmap():
@@ -90,6 +94,7 @@ class BiliBitmap():
                 raise ValueError(
                     '传入参数应为一个由BiliBitmap.createEmptyBitmapList()方法创建或从屑站获取且经过BiliBitmap.decodeBitmap()解析的bitmap列表！')
             """
+
     def __RSize__(self):
         self.length = len(self.bitMap[0])
         self.width = len(self.bitMap)
@@ -177,10 +182,10 @@ class BiliBitmap():
 
     @staticmethod
     def decodeJSON(jsonStr):
-        #用于将json化的bitmap解码并返回一个BiliBitmap对象
+        # 用于将json化的bitmap解码并返回一个BiliBitmap对象
         raw = json.loads(jsonStr)
         r = BiliBitmap(raw)
-        #r.__init__(BiliBitmap.decodeBitmap(raw))
+        # r.__init__(BiliBitmap.decodeBitmap(raw))
         return r
 
     def printf(self):
@@ -204,13 +209,13 @@ if __name__ == '__main__':
     bitmap3 = BiliBitmap(BiliBitmap.createEmptyBitmapList(5, 5))
     bitmap3.fillColor(0, 0, 5, 5, 'B')
     bitmap3.fillColor(1, 2, 3, 2, "A")
-    bit4=object
-    bit4raw=''
+    bit4 = object
+    bit4raw = ''
     with open('z4hdMap.json', 'r') as f:
         bit4raw = f.read()
     bitmap3.printf()
     sb = biliSummerPrinter('yourBilibiliID', 'yourCookie')  # 填入你的屑站ID和Cooke
-    b2 = sb.getBitmap()  # 获取bitmap
+    b2 = sb.getListBitmap()  # 获取bitmap列表
     print(b2[719][1279])
     print(b2[1][1])
     sb.draw(1279, 719, '0')  # 在指定位置（画布右下角）绘画一个黑色像素

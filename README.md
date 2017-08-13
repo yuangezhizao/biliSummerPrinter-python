@@ -15,9 +15,10 @@ $ pip install requests
 - 在指定坐标绘制指定颜色的像素（`biliSummerPrinter.draw(x坐标，y坐标，字符串格式的屑站定义的颜色名）`，成功返回0，失败返回JSON格式的错误信息）
 - 获取单次绘画冷却时间（`biliSummerPrinter.getCDTime()`）
 - 获取bitmap
-  - `biliSummerPrinter.getRawBitmap()`返回纯字符串格式的bitmap
-  - `biliSummerPrinter.getBitmap()`返回经过解析的二维列表格式的bitmap
-  
+  - `biliSummerPrinter.getRawBitmap()` 返回纯字符串格式的bitmap
+  - `biliSummerPrinter.getListBitmap()` 返回经过解析的二维列表格式的bitmap
+  - `biliSummerPrinter.getBitmap()` 返回一个BiliBitmap对象
+
 ### BiliBitmap类
 - 使用一个Bitmap二维列表
 - 解析析纯字符串格式的bitmap为二维列表（静态方法）
