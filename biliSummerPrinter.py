@@ -79,6 +79,7 @@ class biliSummerPrinter(object):
         r = BiliBitmap(BiliBitmap.decodeBitmap(self.getRawBitmap()))
         return r
 
+
 class BiliBitmap():
     def __init__(self, bitmapList):
         try:
@@ -111,7 +112,7 @@ class BiliBitmap():
         i = 0
         while i < 720:
             i2 = 0
-            temp1 = rawBitmap[1280 * i:1280 * i + 1]
+            temp1 = rawBitmap[1280 * i:1280 * (i + 1)]
             while True:
                 if i2 == len(temp1):
                     i2 = 0
@@ -148,7 +149,7 @@ class BiliBitmap():
                 try:
                     rr[i][i2] = bitMap[y + i - 1][x + i - 1]
                 except:
-                    print("[ERROR!] i=%s i2=%s x=%s y=%s" % (i,i2,x,y))
+                    print("[ERROR!] i=%s i2=%s x=%s y=%s" % (i, i2, x, y))
                     raise
                 i2 += 1
             i += 1
