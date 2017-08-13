@@ -175,9 +175,9 @@ class BiliBitmap():
         r = json.dumps(self.bitMap)
         return r
 
-        #失败的JSON解码方法，请手动解码，3Q2X
     @staticmethod
     def decodeJSON(jsonStr):
+        #用于将json化的bitmap解码并返回一个BiliBitmap对象
         raw = json.loads(jsonStr)
         r = BiliBitmap(raw)
         #r.__init__(BiliBitmap.decodeBitmap(raw))
