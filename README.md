@@ -12,16 +12,16 @@ $ pip install requests
 # 功能特色
 ### biliSummerPrinter类
 - 使用bilibiliID和Cookie实例化本对象
-- 在指定坐标绘制指定颜色的像素（biliSummerPrinter.draw(x坐标，y坐标，字符串格式的屑站定义的颜色名），成功返回0，失败返回JSON格式的错误信息）
-- 获取单次绘画冷却时间（biliSummerPrinter.getCDTime()）
+- 在指定坐标绘制指定颜色的像素（`biliSummerPrinter.draw(x坐标，y坐标，字符串格式的屑站定义的颜色名）`，成功返回0，失败返回JSON格式的错误信息）
+- 获取单次绘画冷却时间（`biliSummerPrinter.getCDTime()`）
 - 获取bitmap
-  - biliSummerPrinter.getRawBitmap()返回纯字符串格式的bitmap
-  - biliSummerPrinter.getBitmap()返回经过解析的二维列表格式的bitmap
+  - `biliSummerPrinter.getRawBitmap()`返回纯字符串格式的bitmap
+  - `biliSummerPrinter.getBitmap()`返回经过解析的二维列表格式的bitmap
   
 ### BiliBitmap类
 - 使用一个Bitmap二维列表
 - 解析析纯字符串格式的bitmap为二维列表（静态方法）
-- 自我裁剪（BiliBitmap.cut(x,y,长度,宽度)参数要切出的区域左上角第一个像素的x，y坐标，以及要切出区域的长度与宽度。）（还有一个静态裁剪方法，用法差不多）
+- 自我裁剪（`BiliBitmap.cut(x,y,长度,宽度)`参数要切出的区域左上角第一个像素的x，y坐标，以及要切出区域的长度与宽度。）（还有一个静态裁剪方法，用法差不多）
 - 批量填充颜色
 - 按坐标操作颜色
 - 更多功能请阅读代码注释。
@@ -46,3 +46,6 @@ you.draw(0,0,'0') #在整个画布左上角画一个黑色像素
 
 # 其他用法
 由于时间仓促，其余内容请阅读代码中的注释，3Q2X
+
+# 鸣谢
+部分请求方法参考自：[Bili-AutoDraw](https://github.com/BBleae/Bili-AutoDraw)、[bili_huiban_helper](https://github.com/shugen002/bili_huiban_helper)
