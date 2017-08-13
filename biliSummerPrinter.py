@@ -147,7 +147,7 @@ class BiliBitmap():
                     i2 = 1
                     break
                 try:
-                    rr[i][i2] = bitMap[y + i - 1][x + i - 1]
+                    rr[i][i2] = bitMap[y + i][x + i2]
                 except:
                     print("[ERROR!] i=%s i2=%s x=%s y=%s" % (i, i2, x, y))
                     raise
