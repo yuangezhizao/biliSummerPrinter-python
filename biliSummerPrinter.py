@@ -76,8 +76,8 @@ class biliSummerPrinter(object):
 
     def getBitmap(self):
         # 返回一个BiliBitmap对象
-        return BiliBitmap.decodeJSON(self.getRawBitmap())
-
+        r = BiliBitmap(BiliBitmap.decodeBitmap(self.getRawBitmap()))
+        return r
 
 class BiliBitmap():
     def __init__(self, bitmapList):
@@ -105,6 +105,7 @@ class BiliBitmap():
     def decodeBitmap(rawBitmap):
         #Useage: maplist[y][x]
         # 由于屑站死妈原因，返回的maplist二维列表下标先行后列，使用示例参考上一行。
+        # 参数为纯字符串的的bitmap比如“00000AIIIIIII0001111”
         print("[INFO]:Bitmap Decoding...")
         mapList = BiliBitmap.createEmptyBitmapList(1280, 720)
         i = 0

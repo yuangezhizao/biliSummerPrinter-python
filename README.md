@@ -20,7 +20,7 @@ $ pip install requests
   - `biliSummerPrinter.getBitmap()` 返回一个BiliBitmap对象
 
 ### BiliBitmap类
-- 使用一个Bitmap二维列表
+- 使用一个经过解析的Bitmap二维列表来实例化该类
 - 解析析纯字符串格式的bitmap为二维列表（静态方法）
 - 自我裁剪（`BiliBitmap.cut(x,y,长度,宽度)`参数要切出的区域左上角第一个像素的x，y坐标，以及要切出区域的长度与宽度。）（还有一个静态裁剪方法，用法差不多）
 - 批量填充颜色
