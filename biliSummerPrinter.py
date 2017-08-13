@@ -165,8 +165,8 @@ class BiliBitmap():
                 try:
                     self.bitMap[y + i][x + i2] = color
                 except:
-                    print("[ERROR!]i=%s i2=%s" % (i,i2))
-                
+                    print("[ERROR!]i=%s i2=%s" % (i, i2))
+
                 i2 += 1
             i += 1
 
@@ -199,8 +199,8 @@ if __name__ == '__main__':
     with open('bitmap.json', 'w') as f:
         f.write(json.dumps(bitmap3.bitMap))
     bitmap3.printf()
-    sb = biliSummerPrinter('fake', 'Empty')
-    b2 = sb.getBitmap()
+    sb = biliSummerPrinter('yourBilibiliID', 'yourCookie')  # 填入你的屑站ID和Cooke
+    b2 = sb.getBitmap()  # 获取bitmap
     print(b2[719][1279])
     print(b2[1][1])
-    sb.draw(1279, 719, '0')
+    sb.draw(1279, 719, '0')  # 在指定位置（画布右下角）绘画一个黑色像素
