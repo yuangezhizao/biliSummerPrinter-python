@@ -1,6 +1,7 @@
 print("Esu! UNOFFICAL Project \n biliSummerPrinter now initializing!")
 import requests
 import json
+import time
 
 
 class biliSummerPrinter(object):
@@ -17,7 +18,7 @@ class biliSummerPrinter(object):
     def getCDTime(self):
         # 本方法用于获取绘画冷却时间
         r = requests.get(
-            'http://api.live.bilibili.com/activity/v1/SummerDraw/status', headers=self.headers)
+            'http://api.live.bilibili.com/activity/v1/SummerDraw/status', headers=self.headers, timeout=10)
         jDate = r.json()
         if jDate['code'] == 0:
             return jDate['data']['time']
@@ -66,7 +67,12 @@ class biliSummerPrinter(object):
         # 返回纯文本形式的bitmap，建议调用decodeBitmap静态方法转换为二维列表（先行后列）
         url = 'http://api.live.bilibili.com/activity/v1/SummerDraw/bitmap'
         print("[INFO]:Getting bitmap...")
-        r = requests.get(url, headers=self.headers)
+        try:
+            r = requests.get(url, headers=self.headers, timeout=10)
+        except:
+            time.sleep(5)
+            r = requests.get(url, headers=self.headers, timeout=10)
+
         jDate = r.json()
         return jDate['data']['bitmap']
 
