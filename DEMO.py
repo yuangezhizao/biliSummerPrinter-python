@@ -63,7 +63,7 @@ def checkBitmap(x, y):
             if bili.bitMap[i][i2] != z4Map.bitMap[i][i2]:
                 # 此处取得的X、y均为相对坐标，应与基础坐标相加来得到绝对坐标。
                 diff.append(
-                    {'x': i2, 'y': i, 'rightColor': z4Map.bitMap[i][i2]})
+                    {'x': i2, 'y': i, 'rightColor': str(z4Map.bitMap[i][i2])})
             i2 += 1
         i += 1
     print(diff)
