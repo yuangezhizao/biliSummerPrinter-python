@@ -7,9 +7,17 @@ import json
 import sys
 
 # 声明全局变量
-account = {}
+#account = {}
 z4Map = object
 printer = object
+j = {}
+jaccount = {}
+useage = """
+使用说明:
+DEMO.py -c [配置文件路径] -a [账号信息路径]
+
+未指定时默认值分别为：DEMOconfig.json， account.json
+"""
 
 
 def Timmer(cd):
@@ -18,19 +26,24 @@ def Timmer(cd):
         time.sleep(1)
 
 
-def init(confurl='DEMOconfig.json'):
-    with open(confurl,'rb') as conf:
+def init(confurl='DEMOconfig.json', accounturl='account.json'):
+    global j, jaccount, z4Map, printer
+    with open(confurl, 'rb') as conf:
         b = conf.read().decode('utf-8')
         j = json.loads(b)
-    if j['cookie'] == "yourCookie":
+    with open(accounturl, 'rb') as conf:
+        b = conf.read().decode('utf-8')
+        jaccount = json.loads(b)
+
+    if jaccount['cookie'] == "yourCookie":
         print("[ERROR!]:谢绝默认迫真cookie")
         input("按任意键退出程序>")
         exit()
-    with open(j['mapfile'],'r') as mf:
+    with open(j['mapfile'], 'r') as mf:
         z4Map = BiliBitmap.decodeJSON(mf.read())
     print("Print Map...")
     z4Map.printf()
-    printer = biliSummerPrinter(j['id'], j['cookie'])
+    printer = biliSummerPrinter(jaccount['id'], jaccount['cookie'])
     cd = printer.getCDTime()
     print("cdTime:%s" % cd)
     if cd != 0:
@@ -58,13 +71,33 @@ def checkBitmap(x, y):
 
 
 def main():
-    init()
+    argv = sys.argv
+    i = 1
+    c = "DEMOconfig.json"
+    a = "account.json"
+    '''
+    if len(argv) == 1:
+        print(useage)
+        exit()
+    '''
+    while i < len(argv):
+        if argv[i] == "-h":
+            print(useage)
+            exit()
+        if argv[i] == "-c":
+            c = argv[i + 1]
+        if argv[i] == "-a":
+            a = argv[i + 1]
+        i += 1
+    print(j)
+    init(c, a)
+    print(j)
     while True:
-        diff = checkBitmap(1165, 238)
+        diff = checkBitmap(int(j['x']), int(j['y']))
         if diff != []:
             target1 = random.choice(diff)
             print("TARGET:" + str(target1))
-            printer.draw(1165 + int(target1['x']), 238 +
+            printer.draw(int(j['x']) + int(target1['x']), int(j['y']) +
                          int(target1['y']), target1['rightColor'])
             time.sleep(1)
             Timmer(printer.getCDTime())
@@ -74,7 +107,7 @@ def main():
 
 
 if __name__ == '__main__':
-    try:
-        main()
-    finally:
-        input("Stopped!....Press Any Key To EXIT")
+    # try:
+    main()
+    # finally:
+    #    input("Stopped!....Press Any Key To EXIT")
