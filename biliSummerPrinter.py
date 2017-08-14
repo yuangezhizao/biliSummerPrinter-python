@@ -1,7 +1,8 @@
-print("Esu! UNOFFICAL Project \n biliSummerPrinter now initializing!")
+print("Esu! UNOFFICAL Project: biliSummerPrinter")
 import requests
 import json
 import time
+import datetime
 
 
 class biliSummerPrinter(object):
@@ -14,6 +15,7 @@ class biliSummerPrinter(object):
             'Origin': 'http://live.bilibili.com',
             'Cookie': self.cookie
         }
+        print("[INFO]:biliSummerPrinter now initializing! id=%s" % self.id)
 
     def getCDTime(self):
         # 本方法用于获取绘画冷却时间
@@ -25,6 +27,11 @@ class biliSummerPrinter(object):
         else:
             print("[ERROR!] \n ID:%s \n RequestBody:%s" % (self.id, r.text))
             return "error!"
+
+    @staticmethod
+    def getNowFormatTime():
+        r = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+        return r
 
     def draw(self, x, y, color):
         # 本方法要求传入的color必须为屑站定义的颜色名，请手动使用colorHex2biliFormat方法转换或自行对照，3Q2X。
@@ -39,12 +46,12 @@ class biliSummerPrinter(object):
         r = requests.post(url, data=printData, headers=self.headers)
         jDate = r.json()
         if jDate['code'] == 0:
-            print("[id:%s]成功绘制像素！X=%s Y=%s Msg=%s" %
-                  (self.id, x, y, jDate['msg']))
+            print("[id:%s][%s]成功绘制像素！X=%s Y=%s Msg=%s" %
+                  (self.id, biliSummerPrinter.getNowFormatTime(), x, y, jDate['msg']))
             return 0
         else:
-            print("[id:%s]发生错误：%s \n RequestBody:%s" %
-                  (self.id, jDate['msg'], r.text))
+            print("[id:%s][%s]发生错误：%s \n RequestBody:%s" %
+                  (self.id, biliSummerPrinter.getNowFormatTime(), jDate['msg'], r.text))
             return r.text
 
     @staticmethod
@@ -66,7 +73,7 @@ class biliSummerPrinter(object):
     def getRawBitmap(self):
         # 返回纯文本形式的bitmap，建议调用decodeBitmap静态方法转换为二维列表（先行后列）
         url = 'http://api.live.bilibili.com/activity/v1/SummerDraw/bitmap'
-        print("[INFO]:Getting bitmap...")
+        print("[INFO][%s]:Getting bitmap..."% biliSummerPrinter.getNowFormatTime())
         try:
             r = requests.get(url, headers=self.headers, timeout=10)
         except:

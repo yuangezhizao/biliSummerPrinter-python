@@ -1,8 +1,15 @@
 from biliSummerPrinter import biliSummerPrinter, BiliBitmap
 import time
+import datetime
 import progressbar  # pip install progressbar2
 import random
 import json
+import sys
+
+# 声明全局变量
+account = {}
+z4Map = object
+printer = object
 
 
 def Timmer(cd):
@@ -11,29 +18,26 @@ def Timmer(cd):
         time.sleep(1)
 
 
-account = {}
-with open('account-test.json', 'rb') as f:
-    rb = f.read().decode('utf-8')
-    account = json.loads(rb)
-
-if account['cookie'] == "yourCookie":
-    print("[ERROR!]:谢绝默认迫真cookie")
-    input("按任意键退出程序>")
-    exit()
-
-printer = biliSummerPrinter(account['id'], account['cookie'])
-cd = printer.getCDTime()
-print("cdTime:%s" % cd)
-if cd != 0:
-    Timmer(cd)
-
-z4Map = object
-with open('z4hdMap.json', 'r') as target:
-    z4Map = BiliBitmap.decodeJSON(target.read())
-z4Map.printf()
+def init(confurl='DEMOconfig.json'):
+    with open(confurl,'rb') as conf:
+        b = conf.read().decode('utf-8')
+        j = json.loads(b)
+    if j['cookie'] == "yourCookie":
+        print("[ERROR!]:谢绝默认迫真cookie")
+        input("按任意键退出程序>")
+        exit()
+    with open(j['mapfile'],'r') as mf:
+        z4Map = BiliBitmap.decodeJSON(mf.read())
+    print("Print Map...")
+    z4Map.printf()
+    printer = biliSummerPrinter(j['id'], j['cookie'])
+    cd = printer.getCDTime()
+    print("cdTime:%s" % cd)
+    if cd != 0:
+        Timmer(cd)
 
 
-def checkBitmap(x,y):
+def checkBitmap(x, y):
     # 参数为要检测的bitmap的左上角像素在整个绘板中的坐标
     bili = printer.getBitmap()
     bili.cut(x, y, z4Map.length, z4Map.width)
@@ -54,8 +58,9 @@ def checkBitmap(x,y):
 
 
 def main():
+    init()
     while True:
-        diff = checkBitmap(1165,238)
+        diff = checkBitmap(1165, 238)
         if diff != []:
             target1 = random.choice(diff)
             print("TARGET:" + str(target1))
@@ -69,5 +74,7 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
-    input("Stopped!....Press Any Key To EXIT")
+    try:
+        main()
+    finally:
+        input("Stopped!....Press Any Key To EXIT")

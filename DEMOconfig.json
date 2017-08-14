@@ -1,0 +1,12 @@
+{
+    "_注释": "id:请填入您的屑站ID（仅标识，可任意填写），cookie为您的屑站登陆cookie",
+    "_注释：如何获取屑站登陆cookie":"活动页面下F12->network，等待数十秒后从记录到的请求头中复制Cookie即可",
+    "id": "yourID",
+    "cookie": "yourCookie",
+    "mapfile": "z4hdMap.json",
+    "position":{
+        "_注释":"填入左上角坐标",
+        "x":"",
+        "y":""
+    }
+}
