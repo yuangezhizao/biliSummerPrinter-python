@@ -38,6 +38,9 @@ for i in range(19, 23):
     zMap.setColor(i, 5, 'I')
 xSet(5, 'I', 10, 13, 17)
 
+#6
+#zMap.fillColor(0,6,25,1,'1')
+
 zMap.printf()
 
 with open('z4hdMap.json','w') as f:
