@@ -52,7 +52,11 @@ def init(confurl='DEMOconfig.json', accounturl='account.json'):
 
 def checkBitmap(x, y):
     # 参数为要检测的bitmap的左上角像素在整个绘板中的坐标
-    bili = printer.getBitmap()
+    try:
+        bili = printer.getBitmap()
+    except:
+        time.sleep(5)
+        bili = printer.getBitmap()
     bili.cut(x, y, z4Map.length, z4Map.width)
     bili.printf()
     i = 0
