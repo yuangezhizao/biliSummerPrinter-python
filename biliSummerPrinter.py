@@ -73,7 +73,8 @@ class biliSummerPrinter(object):
     def getRawBitmap(self):
         # 返回纯文本形式的bitmap，建议调用decodeBitmap静态方法转换为二维列表（先行后列）
         url = 'http://api.live.bilibili.com/activity/v1/SummerDraw/bitmap'
-        print("[INFO][%s]:Getting bitmap..."% biliSummerPrinter.getNowFormatTime())
+        print("[INFO][%s]:Getting bitmap..." %
+              biliSummerPrinter.getNowFormatTime())
         try:
             r = requests.get(url, headers=self.headers, timeout=10)
         except:
@@ -112,7 +113,7 @@ class BiliBitmap():
     def __RSize__(self):
         self.length = len(self.bitMap[0])
         self.width = len(self.bitMap)
-        print("Size Reload! \n length:%s \n width:%s" %
+        print("[INFO]Size Reload!  length:%s  width:%s" %
               (self.length, self.width))
 
     @staticmethod
@@ -194,6 +195,24 @@ class BiliBitmap():
                 i2 += 1
             i += 1
 
+    def insteadColor(self, x, y, length, width, color1, color2):
+        # 本方法用相同的颜色替换指定区域
+        # color1为替换前颜色代码，color2为替换后颜色代码
+        self.__RSize__()
+        print("[INFO]:Corlor insteading...")
+        i = 0
+        while i < width:
+            i2 = 0
+            while i2 < length:
+                try:
+                    if str(self.bitMap[y + i][x + i2]) == str(color1):
+                        self.bitMap[y + i][x + i2] = str(color2)
+                except:
+                    print("[ERROR!]i=%s i2=%s" % (i, i2))
+
+                i2 += 1
+            i += 1
+
     def json(self):
         # 返回json文本
         r = json.dumps(self.bitMap)
@@ -226,13 +245,15 @@ class BiliBitmap():
 if __name__ == '__main__':
     print("我谔谔")
     bitmap3 = BiliBitmap(BiliBitmap.createEmptyBitmapList(5, 5))
-    bitmap3.fillColor(0, 0, 5, 5, 'B')
+    bitmap3.fillColor(0, 0, 5, 4, 'B')
     bitmap3.fillColor(1, 2, 3, 2, "A")
+    bitmap3.printf()
+    bitmap3.insteadColor(0,0,bitmap3.length,bitmap3.width,'0','C')
+    bitmap3.printf()
     bit4 = object
     bit4raw = ''
     with open('z4hdMap.json', 'r') as f:
         bit4raw = f.read()
-    bitmap3.printf()
     sb = biliSummerPrinter('yourBilibiliID', 'yourCookie')  # 填入你的屑站ID和Cooke
     b2 = sb.getListBitmap()  # 获取bitmap列表
     print(b2[719][1279])
