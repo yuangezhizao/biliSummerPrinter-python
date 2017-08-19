@@ -92,10 +92,14 @@ def main():
             c = argv[i + 1]
         if argv[i] == "-a":
             a = argv[i + 1]
+        if argv[i]=="--check":
+            init(c, a)
+            checkBitmap(int(j['x']), int(j['y']))
+            exit()
         i += 1
     print(j)
     init(c, a)
-    print(j)
+    print(j)    
     while True:
         diff = checkBitmap(int(j['x']), int(j['y']))
         if diff != []:
